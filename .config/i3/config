@@ -1,0 +1,601 @@
+# Crédits: Franklin Souza
+# Modificado Por @Renatoh
+
+
+exec --no-startup-id polybar mybar -r               #Iniciar a Polybar
+exec --no-startup-id nm-applet                      #Wifi menu
+exec --no-startup-id nitrogen --restore             # Restaurar o Wallpaper
+
+####################################################################
+#                       P R I N C I P A L                          #
+####################################################################
+
+#set $gaps_inner_default 9
+#set $gaps_outer_default 0
+#gaps inner $gaps_inner_default 9
+#gaps outer $gaps_outer_default 0
+
+#gaps inner 9
+#gaps outer 0
+
+# Bordas Arrendondadas
+# OBS: Tem que ter o pacote:
+# https://aur.archlinux.org/packages/i3-gaps-rounded-git
+#border_radius 5
+
+# $mod = Windows
+# Mod4 = Alt
+set $mod Mod4
+
+# Fonts
+font pango:FiraCode 8
+#font pango:Poppins 8
+#font pango:DejaVu Sans Mono 8
+#font pango:Fantasque Sans Mono 9
+
+####################################################################
+#                         FLOATING MODE                            #
+####################################################################
+
+floating_modifier $mod
+
+# smart|urgent|focus|none
+focus_on_window_activation focus
+
+####################################################################
+#                           B O R D A S                            #
+####################################################################
+
+default_border pixel 1
+default_floating_border pixel 1
+new_window pixel 1
+
+#hide_edge_borders smart
+hide_edge_borders both
+
+
+####################################################################
+#                          C O R E S                               #
+####################################################################
+# classe                borda   fundo   texto   ind.    borda filho
+#client.focused          #ffffff #474747 #ffffff #ffffff   #ffffff
+#client.focused_inactive #ffffff #ffffff #ffffff #ffffff   #ffffff
+#client.unfocused        #ffffff #474747 #ffffff #ffffff   #333333
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+# Pywall
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 borda  fundo texto indicador borda filho
+client.focused          $bg     $bg   $fg    $bg         $bg
+client.focused_inactive $bg     $bg   $fg    $bg         $bg
+client.unfocused        $bg     $bg   $fg    $bg         $bg
+client.urgent           $bg     $bg   $fg    $bg         $bg
+client.placeholder      $bg     $bg   $fg    $bg         $bg
+
+client.background       $bg
+
+####################################################################
+#                          A T A L H O S                           #
+####################################################################
+
+# GitHub.sh
+bindsym $mod+Shift+n exec --no-startup-id ~/Scripts/github.sh
+
+# OS update
+bindsym $mod+u exec --no-startup-id i3-sensible-terminal -e sudo pacman -Syu  &
+
+# Restart OS
+#bindsym $mod+r exec --no-startup-id reboot
+
+# Desligar OS
+#bindsym $mod+Shift+o exec --no-startup-id poweroff
+
+# Inicar Calendário
+#bindsym $mod+shift+v exec --no-startup-id ~/Scripts/calendario.sh &
+
+# Iniciar Compositor
+bindsym $mod+p exec --no-startup-id picom -c &
+
+# Matar Compositor
+bindsym $mod+shift+p exec --no-startup-id killall picom &
+
+# Restartar Polybar
+bindsym $mod+o exec --no-startup-id ~/.config/polybar/scripts/launch.sh
+
+# Iniciar PPSSPP
+bindsym $mod+Shift+t exec --no-startup-id ~/Franks/Jogos/PPSSPP/PPSSPPSDL
+
+# Abrir idle
+bindsym $mod+i exec --no-startup-id idle3.8 &
+
+# Sair do i3wm
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Você deseja sair do i3gaps?' -B 'Sim, desejo sair do i3gaps' 'i3-msg exit'"
+
+# Trocar de wallpaper
+bindsym $mod+Shift+w exec --no-startup-id feh --bg-scale "$(find $HOME/wallpapers/ -name "*[jJpP][nNpP][gG]" | shuf -n1)
+
+# Bloquear tela
+#bindsym $mod+x exec --no-startup-id ~/Scripts/fortune.sh
+#bindsym $mod+x exec --no-startup-id ~/Scripts/blurlock.sh
+
+# Glava
+#bindsym $mod+Shift+x exec --no-startup-id glava &
+
+# Gravar Tela
+bindsym $mod+m  exec --no-startup-id ~/.config/polybar/scripts/gravar.sh &
+
+# Printar Tela
+#bindsym $mod+c exec --no-startup-id bash -c 'scrot "$HOME/Imagens/Captura de tela de %d-%m-%Y %H:%M:%S.png"' &
+bindsym $mod+c exec --no-startup-id bash -c 'maim "$HOME/Imagens/Captura de tela de %d-%m-%Y %H:%M:%S.png"' &
+bindsym $mod+z exec --no-startup-id scrot -d 5 &
+#bindsym $mod+c exec --no-startup-id ~/Scripts/screenshot.sh &
+
+# Iniciar terminal
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+#bindsym $mod+Return exec --no-startup-id termite
+#bindsym $mod+Return exec --no-startup-id sakura
+#bindsym $mod+Return exec --no-startup-id kitty
+bindsym $mod+Return exec --no-startup-id alacritty &
+
+# Iniciar APLICATIVOS
+
+# Firefox/Chrome
+#bindsym $mod+b exec firefox
+#bindsym $mod+b exec google-chrome-stable
+
+# Thunar
+#bindsym $mod+g exec thunar
+
+# Telegram
+#bindsym $mod+t exec $HOME/.Telegram/Telegram &
+
+# Matar janela focada
+bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+
+# Mudar foco
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ccedilla focus right
+
+# Alternativa
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Mover janela focada
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ccedilla move right
+
+# Alternativa
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Orientação horizontal
+bindsym $mod+h split h
+
+# Orientação vertical
+bindsym $mod+v split v
+
+# Entrar em modo tela cheia
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Centro
+bindsym $mod+Shift+c move position center
+
+# Tela maximizada/floating
+bindsym $mod+Shift+space floating toggle
+
+
+# Restartar i3
+bindsym $mod+Shift+r restart
+
+# Launchers
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/rofi-dark.rasi
+#bindsym $mod+d exec --no-startup-id rofi -show drun -theme "~/.cache/wal/colors-rofi-dark.rasi" $fg" -nf "$bg" -sb "$bg" -sf "$fg"
+#bindsym $mod+d exec --no-startup-id synapse
+
+# Screenshot
+bindsym Print exec --no-startup-id flameshot gui
+
+####################################################################
+#                             A R E A S                            #
+####################################################################
+
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: 切"
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+#set $ws8 "8: "
+set $ws8 "8: "
+set $ws9 "9: "
+set $ws10 "10: "
+
+#set $ws1 "1"
+#set $ws2 "2"
+#set $ws3 "3"
+#set $ws4 "4"
+#set $ws5 "5"
+#set $ws6 "6"
+#set $ws7 "7"
+#set $ws8 "8"
+#set $ws9 "9"
+#set $ws10 "10"
+
+# Navegar pelas workspaces
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Mover foco para as workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+####################################################################
+#              APLICATIVOS ABERTOS NA WS CORRETA                   #
+####################################################################
+
+# Browser ws=1
+assign [class="(firefox)"] $ws1
+
+# Terminal ws=2
+for_window [class="(Alacritty)"] move to workspace $ws2, floating enable, move position center
+
+# Terminal ws=2
+for_window [class="(Termite)"] move to workspace $ws2, floating enable, move position center
+
+# Telegram ws=3
+for_window [class="(Telegram)"] move to workspace $ws3, floating enable, move position center
+
+# Thunar ws=4
+for_window [class="(Thunar)"] move to workspace $ws4, floating enable, move position center
+
+# PCManFM ws=4
+for_window [class="(Pcmanfm)"] move to workspace $ws4, floating enable, move position center
+
+# Nautilus ws=4
+for_window [class="(Nautilus)"] move to workspace $ws4, floating enable, move position center
+
+# Deezer ws=5
+for_window [class="(Deezer)"] move to workspace $ws5, floating enable, move position center
+
+# Gimp ws=6
+for_window [class="(Gimp)"] move to workspace $ws6, floating enable, move position center
+
+# Inkscape ws=6
+for_window [class="(Inkscape)"] move to workspace $ws6, floating enable, move position center
+
+# MPV ws=7
+for_window [class="(mpv)"] move to workspace $ws7, floating enable, move position center
+
+# VLC ws=7
+for_window [class="(vlc)"] move to workspace $ws7, floating enable, move position center
+
+# Discord ws=8
+for_window [class="(discord)"] move to workspace $ws8, floating enable, move position center
+
+# PyCharm ws=8
+#for_window [class="(jetbrains-pycharm-ce)"] move to workspace $ws8, floating enable, move position center
+
+# Qbittorrent ws=9
+for_window [class="(qBittorrent)"] move to workspace $ws9, floating enable, move position center
+
+# Steam ws=10
+for_window [class="(Steam)"] move to workspace $ws10, floating enable, move position center
+
+# Lutris ws=10
+for_window [class="(Lutris)"] move to workspace $ws10, floating enable, move position center
+
+# PlayOnLinux ws=10
+for_window [class="(PlayOnLinux)"] move to workspace $ws10, floating enable, move position center
+
+# PPSSPP ws=10
+for_window [class="(PPSSPPSDL)"] move to workspace $ws10, floating enable, move position center
+
+####################################################################
+#                           R E G R A S                            #
+####################################################################
+# Alacritty (Terminal)
+
+for_window [class="(Alacritty)"]floating enable, move position center
+
+# Termite (Terminal)
+
+for_window [class="(Termite)"]floating enable, move position center
+
+# Deezer (Streamer de música)
+
+for_window [class="(Deezer)"]floating enable, move position center
+
+# Telegram (Desktop)
+
+for_window [class="(Telegram)"]floating enable, move position center
+
+# Thunar (Gerenciador de arquivos)
+
+for_window [class="(Thunar)"]floating enable, move position center
+
+# Pcmanfm (Gerenciador de arquivos)
+
+for_window [class="(Pcmanfm)"]floating enable, move position center
+
+# VLC (Player de música/Vídeo)
+
+for_window [class="(vlc)"]floating enable, move position center
+
+# MPV (Player de música/Vídeo)
+
+for_window [class="(mpv)"]floating enable, move position center
+
+# Viewnior (Gerenciador de imagens)
+
+for_window [class="(Viewnior)"]floating enable, move position center
+
+# Gucharmap (Mapa de caracteres)
+
+for_window [class="(Gucharmap)"]floating enable, move position center
+
+# Qbittorrent (Gerenciador torrent)
+
+for_window [class="(qBittorrent)"]floating enable, move position center
+
+# PopcornTime (Streamer de filmes)
+
+for_window [class="(popcorntime)"]floating enable, move position center
+
+# Nautilus (Gerenciador de Arquivos)
+
+for_window [class="(Nautilus)"]floating enable, move position center
+
+# Galculator (Calculadora)
+
+for_window [class="(Galculator)"]floating enable, move position center
+
+# Pavucontrol (Gerenciador de aúdio)
+
+for_window [class="(Pavucontrol)"]floating enable, move position center
+
+# Howl (Editor de Texto)
+
+for_window [class="(Howl)"]floating enable, move position center
+
+# LxAppearance (Gerenciador de Temas)
+
+for_window [class="(Lxappearance)"]floating enable, move position center
+
+# Discord (In-Game Chat)
+
+for_window [class="(discord)"]floating enable, move position center
+
+# Bluetooth (Bluetooth)
+
+for_window [class="(Blueman-manager)"]floating enable, move position center
+
+# Steam (Loja de games)
+
+for_window [class="(Steam)"]floating enable, move position center
+
+# Lutris (Gerenciador de games)
+
+for_window [class="(Lutris)"]floating enable, move position center
+
+# PPSSPP (Emulador de PSP)
+
+for_window [class="(PPSSPPSDL)"]floating enable, move position center
+
+# Stacer (Monitoriamento de sistema)
+
+for_window [class="(stacer)"]floating enable, move position center
+
+# Haguichi (Client do Hamachi)
+
+for_window [class="(Haguichi)"]floating enable, move position center
+
+# Mousepad (Editor de Texto)
+
+for_window [class="(Mousepad)"]floating enable, move position center
+
+# Rambox (Multiplas redes sociais)
+
+for_window [class="(Rambox)"]floating enable, move position center
+
+# Evince (Leitor de PDF)
+
+for_window [class="(Evince)"]floating enable, move position center
+
+# VB (VirtualBox)
+
+for_window [class="(VirtualBox Manager)"]floating enable, move position center
+
+# Origin
+for_window [instance="origin.exe"] floating enable
+
+# Script para gravar a tela
+for_window [class="alacritty" title="castnow"] move window to scratchpad
+for_window [title="(gravar$)"] move window to scratchpad
+
+####################################################################
+#                           R E S I Z E                          #
+####################################################################
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left Rwill shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ccedilla resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+#bindsym $mod+r mode "resize"
+
+####################################################################
+#                           G A P S                                #
+####################################################################
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0|d (local), Shift + +|-|0|d (global)
+set $mode_gaps_inner Inner Gaps: +|-|0|d (local), Shift + +|-|0|d (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym d gaps inner current set $gaps_inner_default, mode "default"
+        bindsym Shift+d gaps inner all set $gaps_inner_default, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym d gaps outer current set $gaps_outer_default, mode "default"
+        bindsym Shift+d gaps outer all set $gaps_outer_default, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+####################################################################
+#                        CONTROLE DE AÚDIOS                        #
+####################################################################
+bindsym XF86AudioPlay exec "mpc toggle"
+bindsym XF86AudioStop exec "mpc stop"
+bindsym XF86AudioNext exec "mpc next"
+bindsym XF86AudioPrev exec "mpc prev"
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+####################################################################
+#                      INICIAR COM O I3                            #
+####################################################################
+# Polybar
+exec_always --no-startup-id ~/.config/polybar/scripts/launch.sh
+
+# Wallpapers
+#exec_always --no-startup-id feh --bg-fill ~/Franks/Wallpapers/048.jpg
+
+# Compositor
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Dunst - Notificação
+exec --no-startup-id dunst -b
+
+# Bloqueio de Tela
+exec --no-startup-id xautolock -time 3 -detectsleep -locker $HOME/Scripts/fortune.sh
+
+# Num Lock
+exec --no-startup-id numlockx on &
+
+# Bluetooth
+exec --no-startup-id blueman-applet &
+
+# Flameshot
+exec --no-startup-id flameshot &
+
+# Layout do teclado
+exec --no-startup-id setxkbmap br &
+
+# Iniciar a polybar
+#exec polybar -r top
+#exec polybar -r bottom
+
+# Pywall
+exec --no-startup-id $HOME/.cache/wal/colors.sh &
+
+# Música
+#exec --no-startup-id $HOME/Scripts/mpd-notify.sh &
+#exec --no-startup-id mpd &
+
+# Github.sh
+exec_always --no-startup-id $HOME/Scripts/github.sh
+
+####################################################################
+#                           I3 STATUS                              #
+####################################################################
+#bar {
+#         colors {
+#         background #141414
+#         statusline #2f343f
+#         separator #1c1a1a
+
+        #                         Cores das bordas, background, text
+#        focused_workspace       #ffffff               #ffffff       #000000
+#        active_workspace        #ffffff               #2f343f    #d8dee8
+#        inactive_workspace      #141414            #1c1a1a    #ffffff
+#        urgent_workspace        #2f343f            #eb928b    #000000
+#    }
+#        status_command i3status
+#}
