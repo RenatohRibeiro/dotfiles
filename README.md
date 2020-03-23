@@ -14,4 +14,6 @@
 | `i3-gaps`                                                                          | Window manager                                              | (explains itself)               |
 | `polybar`                                                                          | Status bar                                                  | (explains itself)               |
 | `rofi`                                                                             | Window switcher, application launcher and dmenu replacement | (explains itself)               |
-| `compton`                                                                          | X Compositor                                                | Makes transparency to windows   |
+| `picom`                                                                            | X Compositor                                                | Makes transparency to windows   |
+| `nitrogen`                                                                         | Assistance in changing wallpapers                           | (explains itself)               |
+| `spicetfy`                                                                         | Command-line tool to customize Spotify client               | (explains itself)               |
