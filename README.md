@@ -1,4 +1,4 @@
-#dotfiles
+# dotfiles
 
 ## i3-Gaps
 
