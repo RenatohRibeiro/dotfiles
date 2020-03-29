@@ -18,8 +18,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
+background = #000000
+background-alt = #222
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -27,15 +27,18 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/bottom]
+#################################################################
+#                            Barra TOP                          #
+#################################################################
+[bar/top]
 ;monitor = ${env:MONITOR:eDP1}
 # Set false to use the bar on top
-bottom = true
+bottom = false
 width = 110%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 7.0
+radius = 0
 fixed-center = true
 
 background = ${colors.background}
@@ -48,7 +51,7 @@ border-size = 4
 border-color = #00000000
 
 padding-left = 0
-padding-right = 3
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 2
@@ -60,19 +63,24 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=9;0
 font-3 = "Hack Nerd Font:style=Regular:pixelsize=9;0"
 
+#################################################################
+#                         SEPARADOR BAR BOTTOM                  #
+#################################################################
+
+separator = |
+;separator = /
+
 #########################################################################
 #                           Modulos Polybar                             #
 #########################################################################
 modules-left = bspwm i3
 modules-center = player-mpris-tail
-modules-right = pulseaudio date battery wifi
-#modules-right = xbacklight alsa xkeyboard memory cpu temperature date powermenu
-
+modules-right = pulseaudio date wireless battery powermenu
 #########################################################################
 
-#tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
+tray-position = right
+tray-padding = true
+tray-background =
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -190,10 +198,10 @@ label = MEM %percentage_used%%
 
 [module/wifi]
 type = custom/text
-content = "|   "
+content = " "
 content-foreground = #ffffff
 ;content-underline = #ffffff
-click-left = exec i3-sensible-terminal -e rofi-wifi-menu
+click-left = rofi-wifi-menu
 
 
 [module/date]
@@ -202,7 +210,7 @@ interval = 5
 
 date-alt =
 
-time = | %H:%M |
+time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
@@ -216,7 +224,7 @@ label = %date% %time%
 ;~~~~~~~~~~~~
 [module/pulseaudio]
 type = internal/pulseaudio
-use-ui-max = true
+use-ui-max = false
 
 label-volume  = %{A3:pavucontrol & disown:}%percentage:2%%%{A}
 format-volume = <ramp-volume> <label-volume>
@@ -257,14 +265,17 @@ adapter = AC
 
 poll-interval = 2
 
-format-charging = %{T3}<animation-charging>%{T-}
-format-discharging = %{T3}<ramp-capacity>%{T-}
+format-charging = %{T3}<animation-charging>%{T-}
+format-discharging = %{T3} <ramp-capacity>%{T-}
 
 label-full = %{T3}%{T-}
 
 ramp-capacity-0 = 
+ramp-capacity-0-foreground = #BD574C
 ramp-capacity-1 = 
+ramp-capacity-1-foreground = #BD574C
 ramp-capacity-2 = 
+ramp-capacity-2-foreground = #F5DE72
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-5 = 
@@ -274,49 +285,20 @@ ramp-capacity-8 = 
 ramp-capacity-9 = 
 ramp-capacity-10 = 
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-5 = 
-animation-charging-6 = 
-animation-charging-7 = 
-animation-charging-8 = 
-animation-charging-9 = 
-animation-charging-10 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-7 = 
+animation-charging-8 = 
+animation-charging-9 = 
+animation-charging-10 = 
 
 animation-charging-framerate = 750
 
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
@@ -351,3 +333,64 @@ tail = true
 label = %output%
 format-underline = #50fa7b
 
+;~~~~~~~~~~~~
+; PowerMenu
+;~~~~~~~~~~~~
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 2
+
+label-open = ""
+label-open-foreground = ${xrdb:color7:#222
+;format-underline = #938d8d
+;label-open-foreground = ${colors.secondary}
+label-close = | Cancelar
+label-close-foreground = #fc4141
+label-separator =|
+label-separator-foreground = ${xrdb:color7:#222
+
+menu-0-0 = "Sair"
+menu-0-0-exec = menu-open-1
+menu-0-1 = "Suspender"
+menu-0-1-exec = menu-open-2
+menu-0-2 = "Reiniciar"
+menu-0-2-exec = menu-open-3
+menu-0-3 = "Desligar"
+menu-0-3-exec = menu-open-4
+menu-1-0 = "Sair AGORA!"
+menu-1-0-exec = i3-msg exit
+menu-2-0 = "Suspender AGORA!"
+menu-2-0-exec = systemctl suspend
+menu-3-0 = "Reiniciar AGORA!"
+menu-3-0-exec = systemctl reboot
+menu-4-0 = "Desligar AGORA!"
+menu-4-0-exec = systemctl poweroff
+
+[module/wireless]
+type = internal/network
+interface = wlp3s0
+interval = 0.1
+
+format-packetloss = <animation-packetloss>
+format-connected = <ramp-signal>
+format-disconnected = <label-disconnected>
+label-connected = Conectado
+label-connected-foreground = #64ff33
+label-disconnected = Desconectado
+label-disconnected-foreground = #fe2020
+
+ramp-signal-0 =  
+ramp-signal-0-foreground = #BD574C
+ramp-signal-1 =  
+ramp-signal-1-foreground = #FF8066
+ramp-signal-2 =  
+ramp-signal-2-foreground = #F5DE72
+ramp-signal-3 =  
+ramp-signal-3-foreground = #D8DE72
+ramp-signal-4 =  
+ramp-signal-4-foreground = #BADE72
+ramp-signal-5 =  
+ramp-signal-5-foreground = #96DE72
