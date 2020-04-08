@@ -17,15 +17,14 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #000000
-background-alt = #222
-;foreground = ${xrdb:color7:#222}
+background = #99000000
+background-alt = #111
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+
 
 #################################################################
 #                            Barra TOP                          #
@@ -33,7 +32,7 @@ alert = #bd2c40
 [bar/top]
 ;monitor = ${env:MONITOR:eDP1}
 # Set false to use the bar on top
-bottom = false
+bottom = true
 width = 110%
 height = 27
 ;offset-x = 1%
@@ -55,6 +54,7 @@ padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 2
+
 #########################################################################
 #                             Fontes                                    #
 #########################################################################
@@ -78,9 +78,11 @@ modules-center = player-mpris-tail
 modules-right = pulseaudio date wireless battery powermenu
 #########################################################################
 
-tray-position = right
-tray-padding = true
-tray-background =
+;tray-position = right
+tray-maxsize = 16
+tray-padding = 4
+tray-transparent = false
+tray-background = #000
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -95,9 +97,42 @@ tray-background =
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+#################################################################################
+#                                      Tray                                     #
+#################################################################################
+[bar/systray]
+# As small as possible, polybar will resize it when items get added
+width = 1
+
+# Whatever fits your needs
+height = 30
+
+border-size = 5
+border-color = #00000000
+
+# Bottom left to imitate gnome-shells systray
+bottom = false
+
+# REQUIRED for us to be able to move the window
+override-redirect = true
+
+modules-right = placeholder
+
+tray-position = left
+tray-maxsize = 16
+tray-padding = 8
+tray-transparent = false
+tray-background = #111
+
+
 #########################################################################
 #                           Modulos                                     #
 #########################################################################
+[module/placeholder]
+type = custom/script
+width = 1
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
@@ -166,7 +201,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline= #4b027c
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
@@ -373,6 +408,7 @@ menu-4-0-exec = systemctl poweroff
 type = internal/network
 interface = wlp3s0
 interval = 0.1
+click-left = exec nmtui &
 
 format-packetloss = <animation-packetloss>
 format-connected = <ramp-signal>
@@ -394,3 +430,4 @@ ramp-signal-4 =  
 ramp-signal-4-foreground = #BADE72
 ramp-signal-5 =  
 ramp-signal-5-foreground = #96DE72
+
