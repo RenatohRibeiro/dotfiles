@@ -2,10 +2,6 @@
 # Modificado Por @Renatoh
 
 
-exec --no-startup-id polybar mybar -r               #Iniciar a Polybar
-exec --no-startup-id nm-applet                      #Wifi menu
-exec --no-startup-id nitrogen --restore             # Restaurar o Wallpaper
-
 ####################################################################
 #                       P R I N C I P A L                          #
 ####################################################################
@@ -70,8 +66,8 @@ hide_edge_borders both
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $fg i3wm.color7 #320573
+set_from_resource $bg i3wm.color2 #180336
 
 # class                 borda  fundo texto indicador borda filho
 client.focused          $bg     $bg   $fg    $bg         $bg
@@ -85,6 +81,9 @@ client.background       $bg
 ####################################################################
 #                          A T A L H O S                           #
 ####################################################################
+
+#teste
+bindsym $mod+z exec --no-startup-id $HOME/hideIt.sh --name '^Polybar tray window$' --region 0x0+-0+-10
 
 # GitHub.sh
 bindsym $mod+Shift+n exec --no-startup-id ~/Scripts/github.sh
@@ -135,7 +134,6 @@ bindsym $mod+m  exec --no-startup-id ~/.config/polybar/scripts/gravar.sh &
 # Printar Tela
 #bindsym $mod+c exec --no-startup-id bash -c 'scrot "$HOME/Imagens/Captura de tela de %d-%m-%Y %H:%M:%S.png"' &
 bindsym $mod+c exec --no-startup-id bash -c 'maim "$HOME/Imagens/Captura de tela de %d-%m-%Y %H:%M:%S.png"' &
-bindsym $mod+z exec --no-startup-id scrot -d 5 &
 #bindsym $mod+c exec --no-startup-id ~/Scripts/screenshot.sh &
 
 # Iniciar terminal
@@ -218,6 +216,12 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/rofi-d
 # Screenshot
 bindsym Print exec --no-startup-id flameshot gui
 
+# Brilho
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
 ####################################################################
 #                             A R E A S                            #
 ####################################################################
@@ -274,7 +278,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 ####################################################################
 
 # Browser ws=1
-assign [class="(firefox)"] $ws1
+assign [class="(Chromium)"] $ws1
 
 # Terminal ws=2
 for_window [class="(Alacritty)"] move to workspace $ws2, floating enable, move position center
@@ -283,7 +287,7 @@ for_window [class="(Alacritty)"] move to workspace $ws2, floating enable, move p
 for_window [class="(Termite)"] move to workspace $ws2, floating enable, move position center
 
 # Telegram ws=3
-for_window [class="(Telegram)"] move to workspace $ws3, floating enable, move position center
+for_window [class="(Telegram-desktop)"] move to workspace $ws3, floating enable, move position center
 
 # Thunar ws=4
 for_window [class="(Thunar)"] move to workspace $ws4, floating enable, move position center
@@ -294,8 +298,8 @@ for_window [class="(Pcmanfm)"] move to workspace $ws4, floating enable, move pos
 # Nautilus ws=4
 for_window [class="(Nautilus)"] move to workspace $ws4, floating enable, move position center
 
-# Deezer ws=5
-for_window [class="(Deezer)"] move to workspace $ws5, floating enable, move position center
+# spotify ws=5
+for_window [class="(Spotify)"] move to workspace $ws5, floating enable, move position center
 
 # Gimp ws=6
 for_window [class="(Gimp)"] move to workspace $ws6, floating enable, move position center
@@ -455,7 +459,7 @@ for_window [title="(gravar$)"] move window to scratchpad
 ####################################################################
 #                           R E S I Z E                          #
 ####################################################################
-# resize window (you can also use the mouse for that)
+# rresize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -544,14 +548,14 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # Polybar
 exec_always --no-startup-id ~/.config/polybar/scripts/launch.sh
 
-# Wallpapers
-#exec_always --no-startup-id feh --bg-fill ~/Franks/Wallpapers/048.jpg
-
 # Compositor
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Dunst - Notificação
 exec --no-startup-id dunst -b
+
+#NM applet
+exec --no-startup-id nm-applet
 
 # Bloqueio de Tela
 exec --no-startup-id xautolock -time 3 -detectsleep -locker $HOME/Scripts/fortune.sh
@@ -564,23 +568,15 @@ exec --no-startup-id blueman-applet &
 
 # Flameshot
 exec --no-startup-id flameshot &
-
 # Layout do teclado
 exec --no-startup-id setxkbmap br &
 
 # Iniciar a polybar
-#exec polybar -r top
+exec polybar -r top
 #exec polybar -r bottom
 
-# Pywall
-exec --no-startup-id $HOME/.cache/wal/colors.sh &
-
-# Música
-#exec --no-startup-id $HOME/Scripts/mpd-notify.sh &
-#exec --no-startup-id mpd &
-
-# Github.sh
-exec_always --no-startup-id $HOME/Scripts/github.sh
+# Restaurar o Wallpaper
+exec --no-startup-id nitrogen --restore
 
 ####################################################################
 #                           I3 STATUS                              #
