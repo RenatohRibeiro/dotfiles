@@ -42,7 +42,7 @@ fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
-
+000
 line-size = 3
 line-color = #f00
 
@@ -50,7 +50,7 @@ border-size = 4
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
@@ -74,15 +74,16 @@ separator = |
 #                           Modulos Polybar                             #
 #########################################################################
 modules-left = bspwm i3
-modules-center = player-mpris-tail
+modules-center = backlight
 modules-right = pulseaudio date wireless battery powermenu
 #########################################################################
 
 ;tray-position = right
 tray-maxsize = 16
 tray-padding = 4
-tray-transparent = false
-tray-background = #000
+tray-transparent = yes
+tray-background = #0000
+
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -378,7 +379,7 @@ expand-right = true
 
 format-spacing = 2
 
-label-open = ""
+label-open = "  "
 label-open-foreground = ${xrdb:color7:#222
 ;format-underline = #938d8d
 ;label-open-foreground = ${colors.secondary}
@@ -430,4 +431,3 @@ ramp-signal-4 =  
 ramp-signal-4-foreground = #BADE72
 ramp-signal-5 =  
 ramp-signal-5-foreground = #96DE72
-
