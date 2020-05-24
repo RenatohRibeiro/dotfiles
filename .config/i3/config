@@ -1,4 +1,4 @@
-# Crédits: Franklin Souza
+ # Crédits: Franklin Souza
 # Modificado Por @Renatoh
 
 
@@ -85,20 +85,11 @@ client.background       $bg
 #teste
 bindsym $mod+z exec --no-startup-id $HOME/hideIt.sh --name '^Polybar tray window$' --region 0x0+-0+-10
 
-# GitHub.sh
-bindsym $mod+Shift+n exec --no-startup-id ~/Scripts/github.sh
-
-# OS update
-bindsym $mod+u exec --no-startup-id i3-sensible-terminal -e sudo pacman -Syu  &
-
 # Restart OS
 #bindsym $mod+r exec --no-startup-id reboot
 
 # Desligar OS
 #bindsym $mod+Shift+o exec --no-startup-id poweroff
-
-# Inicar Calendário
-#bindsym $mod+shift+v exec --no-startup-id ~/Scripts/calendario.sh &
 
 # Iniciar Compositor
 bindsym $mod+p exec --no-startup-id picom -c &
@@ -108,12 +99,6 @@ bindsym $mod+shift+p exec --no-startup-id killall picom &
 
 # Restartar Polybar
 bindsym $mod+o exec --no-startup-id ~/.config/polybar/scripts/launch.sh
-
-# Iniciar PPSSPP
-bindsym $mod+Shift+t exec --no-startup-id ~/Franks/Jogos/PPSSPP/PPSSPPSDL
-
-# Abrir idle
-bindsym $mod+i exec --no-startup-id idle3.8 &
 
 # Sair do i3wm
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Você deseja sair do i3gaps?' -B 'Sim, desejo sair do i3gaps' 'i3-msg exit'"
@@ -140,17 +125,17 @@ bindsym $mod+c exec --no-startup-id bash -c 'maim "$HOME/Imagens/Captura de tela
 #bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 #bindsym $mod+Return exec --no-startup-id termite
 #bindsym $mod+Return exec --no-startup-id sakura
-#bindsym $mod+Return exec --no-startup-id kitty
-bindsym $mod+Return exec --no-startup-id alacritty &
+bindsym $mod+Return exec --no-startup-id kitty
+#bindsym $mod+Return exec --no-startup-id alacritty &
 
 # Iniciar APLICATIVOS
 
 # Firefox/Chrome
 #bindsym $mod+b exec firefox
-#bindsym $mod+b exec google-chrome-stable
+bindsym $mod+b exec google-chrome-stable
 
 # Thunar
-#bindsym $mod+g exec thunar
+bindsym $mod+g exec thunar
 
 # Telegram
 #bindsym $mod+t exec $HOME/.Telegram/Telegram &
@@ -209,8 +194,8 @@ bindsym $mod+Shift+r restart
 
 # Launchers
 #bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/rofi-dark.rasi
-#bindsym $mod+d exec --no-startup-id rofi -show drun -theme "~/.cache/wal/colors-rofi-dark.rasi" $fg" -nf "$bg" -sb "$bg" -sf "$fg"
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/slate.rasi
+#bindsym $mod+d exec --no-startup-id rofi -show drun
 #bindsym $mod+d exec --no-startup-id synapse
 
 # Screenshot
@@ -278,10 +263,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 ####################################################################
 
 # Browser ws=1
-assign [class="(Chromium)"] $ws1
+assign [class="(google-chrome)"] $ws1
 
 # Terminal ws=2
-for_window [class="(Alacritty)"] move to workspace $ws2, floating enable, move position center
+for_window [class="(kitty)"] move to workspace $ws2, floating enable, move position center
 
 # Terminal ws=2
 for_window [class="(Termite)"] move to workspace $ws2, floating enable, move position center
@@ -292,12 +277,6 @@ for_window [class="(Telegram-desktop)"] move to workspace $ws3, floating enable,
 # Thunar ws=4
 for_window [class="(Thunar)"] move to workspace $ws4, floating enable, move position center
 
-# PCManFM ws=4
-for_window [class="(Pcmanfm)"] move to workspace $ws4, floating enable, move position center
-
-# Nautilus ws=4
-for_window [class="(Nautilus)"] move to workspace $ws4, floating enable, move position center
-
 # spotify ws=5
 for_window [class="(Spotify)"] move to workspace $ws5, floating enable, move position center
 
@@ -307,20 +286,9 @@ for_window [class="(Gimp)"] move to workspace $ws6, floating enable, move positi
 # Inkscape ws=6
 for_window [class="(Inkscape)"] move to workspace $ws6, floating enable, move position center
 
-# MPV ws=7
-for_window [class="(mpv)"] move to workspace $ws7, floating enable, move position center
 
 # VLC ws=7
 for_window [class="(vlc)"] move to workspace $ws7, floating enable, move position center
-
-# Discord ws=8
-for_window [class="(discord)"] move to workspace $ws8, floating enable, move position center
-
-# PyCharm ws=8
-#for_window [class="(jetbrains-pycharm-ce)"] move to workspace $ws8, floating enable, move position center
-
-# Qbittorrent ws=9
-for_window [class="(qBittorrent)"] move to workspace $ws9, floating enable, move position center
 
 # Steam ws=10
 for_window [class="(Steam)"] move to workspace $ws10, floating enable, move position center
@@ -331,67 +299,25 @@ for_window [class="(Lutris)"] move to workspace $ws10, floating enable, move pos
 # PlayOnLinux ws=10
 for_window [class="(PlayOnLinux)"] move to workspace $ws10, floating enable, move position center
 
-# PPSSPP ws=10
-for_window [class="(PPSSPPSDL)"] move to workspace $ws10, floating enable, move position center
 
 ####################################################################
 #                           R E G R A S                            #
 ####################################################################
-# Alacritty (Terminal)
+# Kitty (Desktop)
 
-for_window [class="(Alacritty)"]floating enable, move position center
-
-# Termite (Terminal)
-
-for_window [class="(Termite)"]floating enable, move position center
-
-# Deezer (Streamer de música)
-
-for_window [class="(Deezer)"]floating enable, move position center
-
-# Telegram (Desktop)
-
-for_window [class="(Telegram)"]floating enable, move position center
+for_window [class="(kitty)"]floating enable, move position center
 
 # Thunar (Gerenciador de arquivos)
 
 for_window [class="(Thunar)"]floating enable, move position center
 
-# Pcmanfm (Gerenciador de arquivos)
-
-for_window [class="(Pcmanfm)"]floating enable, move position center
-
 # VLC (Player de música/Vídeo)
 
 for_window [class="(vlc)"]floating enable, move position center
 
-# MPV (Player de música/Vídeo)
-
-for_window [class="(mpv)"]floating enable, move position center
-
 # Viewnior (Gerenciador de imagens)
 
 for_window [class="(Viewnior)"]floating enable, move position center
-
-# Gucharmap (Mapa de caracteres)
-
-for_window [class="(Gucharmap)"]floating enable, move position center
-
-# Qbittorrent (Gerenciador torrent)
-
-for_window [class="(qBittorrent)"]floating enable, move position center
-
-# PopcornTime (Streamer de filmes)
-
-for_window [class="(popcorntime)"]floating enable, move position center
-
-# Nautilus (Gerenciador de Arquivos)
-
-for_window [class="(Nautilus)"]floating enable, move position center
-
-# Galculator (Calculadora)
-
-for_window [class="(Galculator)"]floating enable, move position center
 
 # Pavucontrol (Gerenciador de aúdio)
 
@@ -405,10 +331,6 @@ for_window [class="(Howl)"]floating enable, move position center
 
 for_window [class="(Lxappearance)"]floating enable, move position center
 
-# Discord (In-Game Chat)
-
-for_window [class="(discord)"]floating enable, move position center
-
 # Bluetooth (Bluetooth)
 
 for_window [class="(Blueman-manager)"]floating enable, move position center
@@ -421,40 +343,9 @@ for_window [class="(Steam)"]floating enable, move position center
 
 for_window [class="(Lutris)"]floating enable, move position center
 
-# PPSSPP (Emulador de PSP)
-
-for_window [class="(PPSSPPSDL)"]floating enable, move position center
-
 # Stacer (Monitoriamento de sistema)
 
 for_window [class="(stacer)"]floating enable, move position center
-
-# Haguichi (Client do Hamachi)
-
-for_window [class="(Haguichi)"]floating enable, move position center
-
-# Mousepad (Editor de Texto)
-
-for_window [class="(Mousepad)"]floating enable, move position center
-
-# Rambox (Multiplas redes sociais)
-
-for_window [class="(Rambox)"]floating enable, move position center
-
-# Evince (Leitor de PDF)
-
-for_window [class="(Evince)"]floating enable, move position center
-
-# VB (VirtualBox)
-
-for_window [class="(VirtualBox Manager)"]floating enable, move position center
-
-# Origin
-for_window [instance="origin.exe"] floating enable
-
-# Script para gravar a tela
-for_window [class="alacritty" title="castnow"] move window to scratchpad
-for_window [title="(gravar$)"] move window to scratchpad
 
 ####################################################################
 #                           R E S I Z E                          #
@@ -545,9 +436,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 ####################################################################
 #                      INICIAR COM O I3                            #
 ####################################################################
-# Polybar
-exec_always --no-startup-id ~/.config/polybar/scripts/launch.sh
-
 # Compositor
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
@@ -557,12 +445,6 @@ exec --no-startup-id dunst -b
 #NM applet
 exec --no-startup-id nm-applet
 
-# Bloqueio de Tela
-exec --no-startup-id xautolock -time 3 -detectsleep -locker $HOME/Scripts/fortune.sh
-
-# Num Lock
-exec --no-startup-id numlockx on &
-
 # Bluetooth
 exec --no-startup-id blueman-applet &
 
@@ -571,12 +453,11 @@ exec --no-startup-id flameshot &
 # Layout do teclado
 exec --no-startup-id setxkbmap br &
 
-# Iniciar a polybar
-exec polybar -r top
-#exec polybar -r bottom
-
 # Restaurar o Wallpaper
 exec --no-startup-id nitrogen --restore
+
+# Polybar
+exec_always --no-startup-id ~/.config/polybar/scripts/launch.sh
 
 ####################################################################
 #                           I3 STATUS                              #
